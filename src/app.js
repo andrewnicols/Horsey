@@ -8,7 +8,7 @@ var main = new UI.Card({
 
 main.show();
 
-main.on('select', function(e) {
+main.on('click', function(e) {
     console.log(e);
     Vibe.vibrate('short');
 });
