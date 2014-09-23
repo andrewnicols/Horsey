@@ -1,15 +1,12 @@
-var UI = require('ui'),
-    Vibe = require('ui/vibe'),
-    timer = require('timer');
-
-
+var Vibe = require('ui/vibe'),
+    
     timer = {
     /**
      * The timer configuration
      */
     config: {},
 
-    maintimer: null,
+    mainTimer: null,
     
     startTime: null,
     
@@ -27,13 +24,13 @@ var UI = require('ui'),
         timer.minuteSeconds = 0;
 
         this.startTime = new Date();
-        this.processtimer();
+        this.processTimer();
         console.log(JSON.stringify(timer.config));
     },
     
-    processtimer: function() {
+    processTimer: function() {
         // Start the timer immediately.
-        timer.maintimer = setTimeout(timer.processtimer, 1000);
+        timer.mainTimer = setTimeout(timer.processTimer, 1000);
 
         var currentTime = new Date(),
             secondsElapsed = parseInt((currentTime - timer.startTime) / 1000),
@@ -75,27 +72,5 @@ var UI = require('ui'),
     }
 };
 
-
-var main = new UI.Card({
-    title: 'Horsey',
-    subtitle: 'Select Grade'
-});
-
-
-main.on('click', 'up', function(e) {
-    // Thanks - we heard you.
-    Vibe.vibrate('short');
-    
-    // Hide the main screen.
-    //main.hide();
-    
-    // Display the status screen.
-    console.log(JSON.stringify(timer));
-
-    timer.configure({
-        optimalTime: 25
-    });
-    timer.start();
-});
-
-main.show();
+var module = {};
+module.exports = timer;
